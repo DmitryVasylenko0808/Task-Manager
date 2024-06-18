@@ -1,6 +1,7 @@
 import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, UseGuards } from '@nestjs/common';
 import { ColumnService } from './column.service';
 import { AuthGuard } from 'src/auth/auth.guard';
+import { AddColumnDto } from './dto/add-column.dto';
 
 @Controller('boards/:boardId/columns')
 export class ColumnController {
@@ -16,8 +17,10 @@ export class ColumnController {
     @UseGuards(AuthGuard)
     async add(
         @Param("boardId", ParseIntPipe) boardId: number, 
-        @Body() body: unknown
-    ) {}
+        @Body() body: AddColumnDto
+    ) {
+        await this.columnService.add(boardId, body);
+    }
 
     @Delete(":columnId")
     @UseGuards(AuthGuard)
