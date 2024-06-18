@@ -58,7 +58,7 @@ model Task {
 model Subtask {
   id    Int     @id @default(autoincrement())
   title String
-  done  Boolean
+  done  Boolean @default(false)
 
   task    Task @relation(fields: [task_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
   task_id Int
