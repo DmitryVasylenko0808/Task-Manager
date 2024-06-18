@@ -16,7 +16,7 @@ export class TasksController {
     @Post()
     @UseGuards(AuthGuard)
     async create(@Body() body: CreateTaskDto) {
-        return await this.tasksService.create(body);
+        await this.tasksService.create(body);
     }
 
     @Patch(":id")
@@ -28,5 +28,7 @@ export class TasksController {
 
     @Delete(":id")
     @UseGuards(AuthGuard)
-    async delete(@Param("id", ParseIntPipe) id: number) {}
+    async delete(@Param("id", ParseIntPipe) id: number) {
+        await this.tasksService.delete(id);
+    }
 }
