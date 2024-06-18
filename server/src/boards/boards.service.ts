@@ -40,10 +40,18 @@ export class BoardsService {
     }
 
     async delete(id: number) {
-        const board = await this.prismaService.board.delete({
+        const board = await this.prismaService.board.findUnique({
             where: { id }
         });
 
-        return board;
+        if (!board) {
+            throw new BadRequestException("Board is not found");
+        }
+
+        const deletedBoard = await this.prismaService.board.delete({
+            where: { id }
+        });
+
+        return deletedBoard;
     }
 }
