@@ -29,4 +29,14 @@ export class ColumnService {
 
         return column;
     }
+
+    async delete(columnId: number) {
+        const column = await this.prismaService.column.delete({
+            where: {
+                id: columnId
+            }
+        });
+
+        return column;
+    }
 }

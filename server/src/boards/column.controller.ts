@@ -24,5 +24,7 @@ export class ColumnController {
 
     @Delete(":columnId")
     @UseGuards(AuthGuard)
-    async delete(@Param("columnId", ParseIntPipe) columnId: number) {}
+    async delete(@Param("columnId", ParseIntPipe) columnId: number) {
+        await this.columnService.delete(columnId);
+    }
 }
