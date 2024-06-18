@@ -1,6 +1,7 @@
 import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post, UseGuards } from '@nestjs/common';
 import { TasksService } from './tasks.service';
 import { AuthGuard } from 'src/auth/auth.guard';
+import { CreateTaskDto } from './dto/create-task.dto';
 
 @Controller('tasks')
 export class TasksController {
@@ -14,7 +15,9 @@ export class TasksController {
 
     @Post()
     @UseGuards(AuthGuard)
-    async create(@Body() body: unknown) {}
+    async create(@Body() body: CreateTaskDto) {
+        return await this.tasksService.create(body);
+    }
 
     @Patch(":id")
     @UseGuards(AuthGuard)
