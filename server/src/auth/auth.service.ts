@@ -5,6 +5,7 @@ import { PrismaService } from 'src/prisma.service';
 import * as bcrypt from "bcrypt";
 import { User } from '@prisma/client';
 import { SignInDto } from './dto/sign-in.dto';
+import { jwtConstants } from './auth.constants';
 
 @Injectable()
 export class AuthService {
@@ -50,7 +51,7 @@ export class AuthService {
         }
 
         const isValidPass = await bcrypt.compare(password, user.password_hash);
-        
+
         if(!isValidPass) {
             throw new BadRequestException("Invalid login or password");
         }
@@ -58,6 +59,15 @@ export class AuthService {
         const token = await this.generateToken(user);
 
         return token;
+    }
+
+    async verifyToken(token: string) {
+        const payload = await this.jwtService.verifyAsync(
+            token, 
+            { secret: jwtConstants.secret }
+        );
+
+        return payload;
     }
 
     private async generateToken(user: User) {
