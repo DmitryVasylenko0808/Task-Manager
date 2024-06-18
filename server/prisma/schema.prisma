@@ -1,0 +1,73 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            Int    @id @default(autoincrement())
+  login         String @unique
+  password_hash String
+
+  boards Board[]
+}
+
+model Board {
+  id    Int    @id @default(autoincrement())
+  title String
+
+  user    User @relation(fields: [user_id], references: [id])
+  user_id Int
+
+  columns Column[]
+}
+
+model Column {
+  id    Int    @id @default(autoincrement())
+  title String
+
+  board    Board @relation(fields: [board_id], references: [id], onDelete: Cascade)
+  board_id Int
+
+  tasks Task[]
+}
+
+model Task {
+  id          Int    @id @default(autoincrement())
+  title       String
+  description String
+
+  column    Column @relation(fields: [column_id], references: [id], onDelete: Cascade)
+  column_id Int
+
+  priority    Priority @relation(fields: [priority_id], references: [id], onUpdate: Cascade)
+  priority_id Int
+
+  subtasks Subtask[]
+}
+
+model Subtask {
+  id    Int     @id @default(autoincrement())
+  title String
+  done  Boolean
+
+  task    Task @relation(fields: [task_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  task_id Int
+}
+
+model Priority {
+  id    Int    @id @default(autoincrement())
+  title String
+  value Int
+
+  tasks Task[]
+}
