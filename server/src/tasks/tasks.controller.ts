@@ -2,6 +2,7 @@ import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post, UseGua
 import { TasksService } from './tasks.service';
 import { AuthGuard } from 'src/auth/auth.guard';
 import { CreateTaskDto } from './dto/create-task.dto';
+import { EditTaskDto } from './dto/edit-task.dto';
 
 @Controller('tasks')
 export class TasksController {
@@ -23,8 +24,10 @@ export class TasksController {
     @UseGuards(AuthGuard)
     async edit(
         @Param("id", ParseIntPipe) id: number,
-        @Body() body: unknown
-    ) {}
+        @Body() body: EditTaskDto
+    ) {
+        return await this.tasksService.edit(id, body);
+    }
 
     @Delete(":id")
     @UseGuards(AuthGuard)

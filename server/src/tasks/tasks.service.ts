@@ -1,6 +1,7 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma.service';
 import { CreateTaskDto } from './dto/create-task.dto';
+import { EditTaskDto } from './dto/edit-task.dto';
 
 @Injectable()
 export class TasksService {
@@ -10,6 +11,8 @@ export class TasksService {
         const task = await this.prismaService.task.findUnique({
             where: { id },
             include: {
+                column: true,
+                priority: true,
                 subtasks: true
             }
         });
@@ -37,11 +40,28 @@ export class TasksService {
                         data: subtasksData
                     }
                 }
-            },
-            include: {
-                subtasks: true
             }
         })
+
+        return task;
+    }
+
+    async edit(id: number, body: EditTaskDto) {
+        const task = await this.prismaService.task.update({
+            where: { id },
+            data: {
+                title: body.title,
+                description: body.description,
+                column_id: body.columnId,
+                priority_id: body.priorityId,
+                subtasks: {
+                    deleteMany: {},
+                    createMany: {
+                        data: body.subtasks
+                    }      
+                }
+            }
+        });
 
         return task;
     }
