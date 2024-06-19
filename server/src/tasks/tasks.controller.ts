@@ -7,6 +7,7 @@ import { ToggleSubtaskDto } from './dto/toggle-subtask.dto';
 import { SubtasksService } from './subtasks.service';
 
 @Controller('tasks')
+@UseGuards(AuthGuard)
 export class TasksController {
     constructor(
         private readonly tasksService: TasksService,
@@ -14,19 +15,16 @@ export class TasksController {
     ) {}
 
     @Get(":id")
-    @UseGuards(AuthGuard)
     async getOne(@Param("id", ParseIntPipe) id: number) {
         return await this.tasksService.getOneById(id);
     }
 
     @Post()
-    @UseGuards(AuthGuard)
     async create(@Body() body: CreateTaskDto) {
         await this.tasksService.create(body);
     }
 
     @Patch(":id")
-    @UseGuards(AuthGuard)
     async edit(
         @Param("id", ParseIntPipe) id: number,
         @Body() body: EditTaskDto
@@ -35,13 +33,11 @@ export class TasksController {
     }
 
     @Delete(":id")
-    @UseGuards(AuthGuard)
     async delete(@Param("id", ParseIntPipe) id: number) {
         await this.tasksService.delete(id);
     }
 
     @Patch(":id/subtasks/:subtaskId")
-    @UseGuards(AuthGuard)
     async toggleSubtask(
         @Param("subtaskId", ParseIntPipe) subtaskId: number,
         @Body() body: ToggleSubtaskDto
