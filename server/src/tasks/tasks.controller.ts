@@ -29,7 +29,7 @@ export class TasksController {
         @Param("id", ParseIntPipe) id: number,
         @Body() body: EditTaskDto
     ) {
-        return await this.tasksService.edit(id, body);
+        await this.tasksService.edit(id, body);
     }
 
     @Delete(":id")
@@ -42,6 +42,6 @@ export class TasksController {
         @Param("subtaskId", ParseIntPipe) subtaskId: number,
         @Body() body: ToggleSubtaskDto
     ) {
-        return await this.subtaskService.toggle(subtaskId, body); 
+        await this.subtaskService.toggle(subtaskId, body); 
     }
 }
