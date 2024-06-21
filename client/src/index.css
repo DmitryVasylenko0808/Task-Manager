@@ -1,8 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 body {
   margin: 0;
   min-height: 100vh;
 
   font-family: "Roboto", sans-serif;
   font-size: 16px;
-  font-family: 500;
+  font-weight: 500;
 }
