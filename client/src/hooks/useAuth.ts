@@ -1,9 +1,10 @@
 import { useLazyGetMeQuery } from "../api/auth/authApi";
-import { useAppDispatch } from "../redux/hooks";
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { setUser } from "../redux/slices/authSlice";
 
 export const useAuth = () => {
     const dispatch = useAppDispatch();
+    const user = useAppSelector(state => state.auth.user)
 
     const [triggerGetMe] = useLazyGetMeQuery();
 
@@ -31,6 +32,7 @@ export const useAuth = () => {
     return {
         token,
         isAuthenticated,
+        user,
         authenticate,
         setAuthData,
         logOut
