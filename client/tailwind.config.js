@@ -13,7 +13,8 @@ export default {
             200: "#333333",
             300: "#111111"
           },
-          gray: "#f7f7f7"
+          gray: "#f7f7f7",
+          primary: "#690dff"
         }
       }
     },
