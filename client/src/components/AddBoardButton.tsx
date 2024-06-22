@@ -1,7 +1,5 @@
-import React, { useState } from "react";
 import Button from "./Button";
 import { TbPlus } from "react-icons/tb";
-import Modal from "./Modal";
 import { useModal } from "../hooks/useModal";
 import AddBoardModal from "./AddBoardModal";
 

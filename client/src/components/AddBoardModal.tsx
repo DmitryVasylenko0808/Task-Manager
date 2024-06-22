@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import Modal, { ModalProps } from "./Modal";
 import { z } from "zod";
 import { useForm } from "react-hook-form";

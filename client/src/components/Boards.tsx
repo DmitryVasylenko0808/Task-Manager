@@ -1,4 +1,3 @@
-import React, { useEffect } from "react";
 import { useGetBoardsQuery } from "../api/boards/boardsApi";
 import { NavLink } from "react-router-dom";
 import AddBoardButton from "./AddBoardButton";
