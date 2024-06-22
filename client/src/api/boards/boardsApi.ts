@@ -2,6 +2,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
 import { API_URL_BOARDS } from "../../constants/api";
 import { GetBoardsDto } from "./dto/GetBoardsDTO";
 import { GetOneBoardDto } from "./dto/GetOneBoardDTO";
+import { GetColumnsDto } from "./dto/GetColumnsDTO";
 
 type CreateBoardParams = {
     title: string;
@@ -39,6 +40,19 @@ export const boardsApi = createApi({
                 method: "DELETE"
             }),
             invalidatesTags: ["Boards"]
+        }),
+        getColumns: builder.query<GetColumnsDto, number>({
+            query: (id) => `/${id}/columns`
+        }),
+        addColumn: builder.mutation<unknown, unknown>({
+            query: ({id, ...body}) => ({
+                url: `/${id}/columns`,
+                method: "POST",
+                body
+            })
+        }),
+        deleteColumn: builder.mutation<unknown, unknown>({
+            query: ({ boardId, columnId }) => `/${boardId}/columns/${columnId}`
         })
     })
 });
@@ -48,5 +62,8 @@ export const {
     useLazyGetBoardsQuery,
     useGetOneBoardQuery,
     useCreateBoardMutation,
-    useDeleteBoardMutation
+    useDeleteBoardMutation,
+    useGetColumnsQuery,
+    useAddColumnMutation,
+    useDeleteColumnMutation
  } = boardsApi;

@@ -1,9 +1,11 @@
 import BoardInfo from "../components/BoardInfo";
+import Columns from "../components/Columns";
 
 const BoardDetailsPage = () => {
   return (
-    <div className="flex flex-col">
+    <div className="h-full flex flex-col">
       <BoardInfo />
+      <Columns />
     </div>
   );
 };

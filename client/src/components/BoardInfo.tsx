@@ -18,7 +18,7 @@ const BoardInfo = () => {
       <div className="flex gap-x-4">
         <Button size="default" variant="primary">
           <TbPlus size={24} />
-          Add Task
+          Add Column
         </Button>
         <Button
           size="default"

@@ -12,7 +12,13 @@ export class ColumnService {
                 board_id: boardId
             },
             include: {
-                tasks: true
+                tasks: {
+                    select: {
+                        id: true,
+                        title: true,
+                        priority: true
+                    }
+                },
             }
         });
 

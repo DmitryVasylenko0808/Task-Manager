@@ -10,7 +10,7 @@ const Boards = () => {
       <h2 className="mb-7 text-2xl text-tm-black-300 font-bold">All Boards</h2>
       <ul className="">
         {data?.map((board) => (
-          <li className="block">
+          <li className="block" key={board.id}>
             <NavLink
               to={`/${board.id}`}
               className="block py-3 px-5 rounded-3xl text-lg text-tm-black-300"
