@@ -1,7 +1,11 @@
-import React from "react";
+import BoardInfo from "../components/BoardInfo";
 
 const BoardDetailsPage = () => {
-  return <div>BoardDetailsPage</div>;
+  return (
+    <div className="flex flex-col">
+      <BoardInfo />
+    </div>
+  );
 };
 
 export default BoardDetailsPage;

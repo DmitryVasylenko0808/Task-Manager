@@ -18,7 +18,7 @@ export default {
         }
       },
       width: {
-        addBoardModal: "550px"
+        boardModal: "550px"
       }
     },
   },

@@ -1,6 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
 import { API_URL_BOARDS } from "../../constants/api";
 import { GetBoardsDto } from "./dto/GetBoardsDTO";
+import { GetOneBoardDto } from "./dto/GetOneBoardDTO";
 
 type CreateBoardParams = {
     title: string;
@@ -20,7 +21,7 @@ export const boardsApi = createApi({
             query: () => "/",
             providesTags: ["Boards"]
         }),
-        getOneBoard: builder.query<unknown, unknown>({
+        getOneBoard: builder.query<GetOneBoardDto, number>({
             query: (id) => `/${id}`,
             providesTags: ["Boards"]
         }),
@@ -32,7 +33,7 @@ export const boardsApi = createApi({
             }),
             invalidatesTags: ["Boards"]
         }),
-        deleteBoard: builder.mutation<unknown, unknown>({
+        deleteBoard: builder.mutation<void, number>({
             query: (id) => ({
                 url: `/${id}`,
                 method: "DELETE"

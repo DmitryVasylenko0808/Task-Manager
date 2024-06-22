@@ -39,7 +39,7 @@ const AddBoardModal = (modalProps: AddBoardModalProps) => {
 
   return (
     <Modal {...modalProps}>
-      <form className="w-addBoardModal" onSubmit={handleSubmit(submitHandler)}>
+      <form className="w-boardModal" onSubmit={handleSubmit(submitHandler)}>
         <h3 className="mb-4 text-2xl">Creating Board</h3>
         <div className="mb-7">
           <TextField

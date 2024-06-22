@@ -13,7 +13,7 @@ const Modal = ({ open, onClose, children }: ModalProps) => {
   return (
     <div className="fixed top-0 left-0 w-full h-screen bg-black/30 flex items-center justify-center">
       <div className="p-7 bg-white shadow-xl rounded-2xl">
-        <div className="flex justify-end">
+        <div className="mb-1 flex justify-end">
           <Button
             size="default"
             className="bg-white text-tm-black-300"
