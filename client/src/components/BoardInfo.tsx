@@ -4,8 +4,10 @@ import Button from "./Button";
 import { TbPlus, TbTrash } from "react-icons/tb";
 import { useModal } from "../hooks/useModal";
 import DeleteBoardModal from "./DeleteBoardModal";
+import AddColumnModal from "./AddColumnModal";
 
 const BoardInfo = () => {
+  const addColumnModal = useModal();
   const deleteBoardModal = useModal();
 
   const { boardId } = useParams();
@@ -16,7 +18,11 @@ const BoardInfo = () => {
     <div className="py-8 px-12 flex items-center justify-between bg-white border-b">
       <h2 className="text-2xl font-bold">{data?.title}</h2>
       <div className="flex gap-x-4">
-        <Button size="default" variant="primary">
+        <Button
+          size="default"
+          variant="primary"
+          onClick={addColumnModal.onOpen}
+        >
           <TbPlus size={24} />
           Add Column
         </Button>
@@ -29,6 +35,7 @@ const BoardInfo = () => {
           Delete Board
         </Button>
       </div>
+      {data && <AddColumnModal board={data} {...addColumnModal} />}
       {data && <DeleteBoardModal board={data} {...deleteBoardModal} />}
     </div>
   );

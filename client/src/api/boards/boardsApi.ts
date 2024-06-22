@@ -6,6 +6,16 @@ import { GetColumnsDto } from "./dto/GetColumnsDTO";
 
 type CreateBoardParams = {
     title: string;
+};
+
+type AddColumnParams = {
+    id: number;
+    title: string;
+};
+
+type DeleteColumnParams = {
+    boardId: number;
+    columnId: number;
 }
 
 export const boardsApi = createApi({
@@ -16,7 +26,7 @@ export const boardsApi = createApi({
             headers.set("authorization", `Bearer ${localStorage.getItem("token")}`)
         }
     }),
-    tagTypes: ["Boards"],
+    tagTypes: ["Boards", "Columns"],
     endpoints: builder => ({
         getBoards: builder.query<GetBoardsDto, void>({
             query: () => "/",
@@ -42,17 +52,23 @@ export const boardsApi = createApi({
             invalidatesTags: ["Boards"]
         }),
         getColumns: builder.query<GetColumnsDto, number>({
-            query: (id) => `/${id}/columns`
+            query: (id) => `/${id}/columns`,
+            providesTags: ["Columns"]
         }),
-        addColumn: builder.mutation<unknown, unknown>({
+        addColumn: builder.mutation<void, AddColumnParams>({
             query: ({id, ...body}) => ({
                 url: `/${id}/columns`,
                 method: "POST",
                 body
-            })
+            }),
+            invalidatesTags: ["Columns"]
         }),
-        deleteColumn: builder.mutation<unknown, unknown>({
-            query: ({ boardId, columnId }) => `/${boardId}/columns/${columnId}`
+        deleteColumn: builder.mutation<void, DeleteColumnParams>({
+            query: ({ boardId, columnId }) => ({ 
+                url: `/${boardId}/columns/${columnId}`,
+                method: "DELETE"
+            }),
+            invalidatesTags: ["Columns"]
         })
     })
 });
