@@ -4,6 +4,7 @@ import { setUser } from "../redux/slices/authSlice";
 
 export const useAuth = () => {
     const dispatch = useAppDispatch();
+    
     const user = useAppSelector(state => state.auth.user)
 
     const [triggerGetMe] = useLazyGetMeQuery();
