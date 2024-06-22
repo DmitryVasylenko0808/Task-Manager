@@ -14,7 +14,7 @@ export default {
             300: "#111111"
           },
           gray: "#f7f7f7",
-          primary: "#690dff"
+          primary: "#690dff",
         }
       }
     },

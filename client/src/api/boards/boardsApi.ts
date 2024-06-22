@@ -1,5 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
 import { API_URL_BOARDS } from "../../constants/api";
+import { GetBoardsDto } from "./dto/GetBoardsDTO";
 
 export const boardsApi = createApi({
     reducerPath: "boardsApi",
@@ -11,7 +12,7 @@ export const boardsApi = createApi({
     }),
     tagTypes: ["Boards"],
     endpoints: builder => ({
-        getBoards: builder.query<unknown, unknown>({
+        getBoards: builder.query<GetBoardsDto, void>({
             query: () => "/",
             providesTags: ["Boards"]
         }),
