@@ -63,7 +63,7 @@ const SignInForm = () => {
           Sign Up
         </Link>
       </p>
-      <Button size="big" type="submit" disabled={isLoading}>
+      <Button variant="primary" size="big" type="submit" disabled={isLoading}>
         {isLoading ? <Loader variant="button" /> : "Sign In"}
       </Button>
     </form>

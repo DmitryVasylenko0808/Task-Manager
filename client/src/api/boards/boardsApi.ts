@@ -2,6 +2,10 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
 import { API_URL_BOARDS } from "../../constants/api";
 import { GetBoardsDto } from "./dto/GetBoardsDTO";
 
+type CreateBoardParams = {
+    title: string;
+}
+
 export const boardsApi = createApi({
     reducerPath: "boardsApi",
     baseQuery: fetchBaseQuery({
@@ -20,7 +24,7 @@ export const boardsApi = createApi({
             query: (id) => `/${id}`,
             providesTags: ["Boards"]
         }),
-        createBoard: builder.mutation<unknown, unknown>({
+        createBoard: builder.mutation<void, CreateBoardParams>({
             query: (body) => ({
                 url: "/",
                 method: "POST",
@@ -40,6 +44,7 @@ export const boardsApi = createApi({
 
 export const { 
     useGetBoardsQuery,
+    useLazyGetBoardsQuery,
     useGetOneBoardQuery,
     useCreateBoardMutation,
     useDeleteBoardMutation

@@ -16,6 +16,9 @@ export default {
           gray: "#f7f7f7",
           primary: "#690dff",
         }
+      },
+      width: {
+        addBoardModal: "550px"
       }
     },
   },

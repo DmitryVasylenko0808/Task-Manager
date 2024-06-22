@@ -8,11 +8,7 @@ const LogOut = () => {
 
   return (
     <div className="mb-auto py-5 px-7 border-t">
-      <Button
-        size="default"
-        className="inline-flex items-center gap-3"
-        onClick={logOut}
-      >
+      <Button size="default" variant="terciary" onClick={logOut}>
         <TbLogout2 size={32} />
         <span className="text-lg">Log out</span>
       </Button>
