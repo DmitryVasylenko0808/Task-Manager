@@ -1,5 +1,5 @@
 import React from "react";
-import Button from "./Button";
+import Button from "./ui/Button";
 import { TbLogout2 } from "react-icons/tb";
 import { useAuth } from "../hooks/useAuth";
 

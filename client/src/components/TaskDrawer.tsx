@@ -1,7 +1,7 @@
 import { TbListCheck } from "react-icons/tb";
 import { useGetOneTaskQuery } from "../api/tasks/tasksApi";
-import Drawer, { DrawerProps } from "./Drawer";
-import Loader from "./Loader";
+import Drawer, { DrawerProps } from "./ui/Drawer";
+import Loader from "./ui/Loader";
 import PriorityBlock from "./PriorityBlock";
 import SubTaskItem from "./SubTaskItem";
 

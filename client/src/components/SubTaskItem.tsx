@@ -1,5 +1,5 @@
 import { Subtask } from "../api/tasks/dto/GetOneTaskDTO";
-import CheckBox from "./CheckBox";
+import CheckBox from "./ui/CheckBox";
 
 type SubTaskItemProps = {
   data: Subtask;

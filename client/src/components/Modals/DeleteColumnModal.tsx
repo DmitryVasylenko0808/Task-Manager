@@ -1,8 +1,8 @@
-import { useDeleteColumnMutation } from "../api/boards/boardsApi";
-import Button from "./Button";
-import Modal, { ModalProps } from "./Modal";
-import Loader from "./Loader";
-import { Column } from "../api/boards/dto/GetColumnsDTO";
+import { useDeleteColumnMutation } from "../../api/boards/boardsApi";
+import Button from "../ui/Button";
+import Modal, { ModalProps } from "../ui/Modal";
+import Loader from "../ui/Loader";
+import { Column } from "../../api/boards/dto/GetColumnsDTO";
 
 type DeleteColumnModalProps = ModalProps & {
   column: Column;

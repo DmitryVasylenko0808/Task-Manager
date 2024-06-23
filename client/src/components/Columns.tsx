@@ -1,8 +1,8 @@
 import { useParams } from "react-router";
 import { useGetColumnsQuery } from "../api/boards/boardsApi";
-import Button from "./Button";
+import Button from "./ui/Button";
 import { TbPlus } from "react-icons/tb";
-import Loader from "./Loader";
+import Loader from "./ui/Loader";
 import ColumnItem from "./ColumnItem";
 
 const Columns = () => {

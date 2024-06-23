@@ -1,13 +1,13 @@
 import { z } from "zod";
-import { Board } from "../api/boards/dto/GetBoardsDTO";
-import Button from "./Button";
-import Modal, { ModalProps } from "./Modal";
-import TextField from "./TextField";
+import { Board } from "../../api/boards/dto/GetBoardsDTO";
+import Button from "../ui/Button";
+import Modal, { ModalProps } from "../ui/Modal";
+import TextField from "../ui/TextField";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect } from "react";
-import { useAddColumnMutation } from "../api/boards/boardsApi";
-import Loader from "./Loader";
+import { useAddColumnMutation } from "../../api/boards/boardsApi";
+import Loader from "../ui/Loader";
 
 type AddColumnModalProps = ModalProps & {
   board: Board;

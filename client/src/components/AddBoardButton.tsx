@@ -1,7 +1,7 @@
-import Button from "./Button";
+import Button from "./ui/Button";
 import { TbPlus } from "react-icons/tb";
 import { useModal } from "../hooks/useModal";
-import AddBoardModal from "./AddBoardModal";
+import AddBoardModal from "./Modals/AddBoardModal";
 
 const AddBoardButton = () => {
   const modal = useModal();

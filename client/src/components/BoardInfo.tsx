@@ -1,10 +1,10 @@
 import { useParams } from "react-router";
 import { useGetOneBoardQuery } from "../api/boards/boardsApi";
-import Button from "./Button";
+import Button from "./ui/Button";
 import { TbPlus, TbTrash } from "react-icons/tb";
 import { useModal } from "../hooks/useModal";
-import DeleteBoardModal from "./DeleteBoardModal";
-import AddColumnModal from "./AddColumnModal";
+import DeleteBoardModal from "./Modals/DeleteBoardModal";
+import AddColumnModal from "./Modals/AddColumnModal";
 
 const BoardInfo = () => {
   const addColumnModal = useModal();

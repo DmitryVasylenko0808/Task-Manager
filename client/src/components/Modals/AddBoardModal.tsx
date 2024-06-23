@@ -1,12 +1,12 @@
 import { useEffect } from "react";
-import Modal, { ModalProps } from "./Modal";
+import Modal, { ModalProps } from "../ui/Modal";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useCreateBoardMutation } from "../api/boards/boardsApi";
-import TextField from "./TextField";
-import Button from "./Button";
-import Loader from "./Loader";
+import { useCreateBoardMutation } from "../../api/boards/boardsApi";
+import TextField from "../ui/TextField";
+import Button from "../ui/Button";
+import Loader from "../ui/Loader";
 
 const addBoardSchema = z.object({
   title: z.string().min(1, "Title is required"),

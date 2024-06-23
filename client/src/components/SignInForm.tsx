@@ -1,7 +1,7 @@
 import React from "react";
-import TextField from "./TextField";
-import Button from "./Button";
-import Loader from "./Loader";
+import TextField from "./ui/TextField";
+import Button from "./ui/Button";
+import Loader from "./ui/Loader";
 import { Link, useNavigate } from "react-router-dom";
 import { useSignInMutation } from "../api/auth/authApi";
 import { useForm } from "react-hook-form";

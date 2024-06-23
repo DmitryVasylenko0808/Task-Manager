@@ -1,9 +1,9 @@
 import { useNavigate } from "react-router";
-import { useDeleteBoardMutation } from "../api/boards/boardsApi";
-import { Board } from "../api/boards/dto/GetBoardsDTO";
-import Button from "./Button";
-import Modal, { ModalProps } from "./Modal";
-import Loader from "./Loader";
+import { useDeleteBoardMutation } from "../../api/boards/boardsApi";
+import { Board } from "../../api/boards/dto/GetBoardsDTO";
+import Button from "../ui/Button";
+import Modal, { ModalProps } from "../ui/Modal";
+import Loader from "../ui/Loader";
 
 type DeleteBoardModalProps = ModalProps & {
   board: Board;

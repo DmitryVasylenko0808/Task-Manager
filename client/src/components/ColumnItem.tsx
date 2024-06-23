@@ -1,9 +1,9 @@
 import { CgClose } from "react-icons/cg";
 import { Column } from "../api/boards/dto/GetColumnsDTO";
-import Button from "./Button";
+import Button from "./ui/Button";
 import TaskCard from "./TaskCard";
 import { useModal } from "../hooks/useModal";
-import DeleteColumnModal from "./DeleteColumnModal";
+import DeleteColumnModal from "./Modals/DeleteColumnModal";
 
 type ColumnItemProps = {
   data: Column;
