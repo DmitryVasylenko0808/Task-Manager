@@ -11,7 +11,7 @@ const Drawer = ({ open, onClose, children }: DrawerProps) => {
   return (
     <div
       onClick={onClose}
-      className="fixed top-0 left-0 w-full min-h-screen flex justify-end bg-black/30"
+      className="fixed top-0 left-0 z-40 w-full min-h-screen flex justify-end bg-black/30"
     >
       <div
         onClick={(e) => e.stopPropagation()}
