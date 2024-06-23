@@ -1,24 +1,18 @@
 import { useParams } from "react-router";
 import { useGetColumnsQuery } from "../api/boards/boardsApi";
-import Button from "./ui/Button";
-import { TbPlus } from "react-icons/tb";
 import Loader from "./ui/Loader";
 import ColumnItem from "./ColumnItem";
+import AddTaskButton from "./AddTaskButton";
 
 const Columns = () => {
   const { boardId } = useParams();
 
   const { data, isLoading } = useGetColumnsQuery(parseFloat(boardId as string));
 
-  console.log(data);
-
   return (
     <div className="flex-1 flex flex-col bg-tm-gray">
       <div className="px-12 py-6 flex justify-end">
-        <Button size="default" variant="primary">
-          <TbPlus size={24} />
-          Add Task
-        </Button>
+        <AddTaskButton />
       </div>
       <div className="px-12 flex-1 flex gap-x-4 overflow-auto">
         {isLoading ? (

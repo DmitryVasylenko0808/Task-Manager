@@ -1,16 +1,16 @@
 import React, { ComponentProps, forwardRef } from "react";
 
-type TextFieldProps = ComponentProps<"input"> & {
+type TextAreaProps = ComponentProps<"textarea"> & {
   label?: string;
   error?: string;
 };
 
-const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
+const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
   ({ label, error, ...inputProps }, ref) => {
     return (
-      <div className="flex-auto">
+      <div>
         <label className="mb-1 text-tm-black-100">{label}</label>
-        <input
+        <textarea
           className="outline-none block w-full mb-2 py-2 border-b-4 text-lg"
           ref={ref}
           {...inputProps}
@@ -21,4 +21,4 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
   }
 );
 
-export default TextField;
+export default TextArea;
