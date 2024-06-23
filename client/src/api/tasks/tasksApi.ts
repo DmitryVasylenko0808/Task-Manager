@@ -1,6 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
 import { API_URL_TASKS } from "../../constants/api";
 import { GetOneTaskDto } from "./dto/GetOneTaskDTO";
+import { boardsApi } from "../boards/boardsApi";
 
 type AddTaskParams = {
     title: string;
@@ -30,7 +31,11 @@ export const tasksApi = createApi({
                 method: "POST",
                 body
             }),
-            invalidatesTags: ["Tasks", "Columns"]
+            invalidatesTags: ["Tasks"],
+            async onQueryStarted(_, { dispatch, queryFulfilled }) {
+                await queryFulfilled;
+                dispatch(boardsApi.util.invalidateTags(["Columns"]))
+            },
         }),
         editTask: builder.mutation<unknown, unknown>({
             query: ({ id, ...body }) => ({
@@ -44,7 +49,11 @@ export const tasksApi = createApi({
                 url: `/${id}`,
                 method: "DELETE"
             }),
-            invalidatesTags: ["Tasks", "Columns"]
+            invalidatesTags: ["Tasks"],
+            async onQueryStarted(_, { dispatch, queryFulfilled }) {
+                await queryFulfilled;
+                dispatch(boardsApi.util.invalidateTags(["Columns"]))
+            },
         })
     })
 });
