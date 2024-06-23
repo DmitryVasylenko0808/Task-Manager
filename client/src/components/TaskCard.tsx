@@ -2,10 +2,11 @@ import { Task } from "../api/boards/dto/GetColumnsDTO";
 import { useDrawer } from "../hooks/useDrawer";
 import TaskDrawer from "./TaskDrawer";
 import PriorityBlock from "./PriorityBlock";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Button from "./ui/Button";
 import { TbDotsVertical, TbEdit, TbTrash } from "react-icons/tb";
 import { useDeleteTaskMutation } from "../api/tasks/tasksApi";
+import { useClickOutside } from "../hooks/useClickOutside";
 
 type TaskCardProps = {
   data: Task;
@@ -14,11 +15,14 @@ type TaskCardProps = {
 const TaskCard = ({ data }: TaskCardProps) => {
   const taskDrawer = useDrawer();
 
+  const ref = useRef<HTMLDivElement>(null);
   const [openMenu, setOpenMenu] = useState<boolean>(false);
 
   const [triggerDeleteTask] = useDeleteTaskMutation();
 
-  const handleClickToggleMenu = () => setOpenMenu(!openMenu);
+  useClickOutside(ref, () => setOpenMenu(false));
+
+  const handleClickTOpenMenu = () => setOpenMenu(true);
 
   const handleClickDeleteTask = () => {
     triggerDeleteTask(data.id)
@@ -36,12 +40,15 @@ const TaskCard = ({ data }: TaskCardProps) => {
               size="default"
               variant="terciary"
               className="p-0"
-              onClick={handleClickToggleMenu}
+              onClick={handleClickTOpenMenu}
             >
               <TbDotsVertical size={18} />
             </Button>
             {openMenu && (
-              <div className="absolute top-3 left-3 z-10 bg-white shadow-lg rounded-lg">
+              <div
+                className="absolute top-3 left-3 z-10 bg-white shadow-lg rounded-lg"
+                ref={ref}
+              >
                 <Button size="default" variant="terciary">
                   <TbEdit size={24} />
                   Edit
