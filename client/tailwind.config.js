@@ -18,10 +18,13 @@ export default {
         }
       },
       width: {
-        boardModal: "550px"
+        boardModal: "550px",
+        drawer: "460px"
       }
     },
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/forms")({
+    strategy: "class"
+  })],
 }
 
