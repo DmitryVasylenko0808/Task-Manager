@@ -11,6 +11,20 @@ type AddTaskParams = {
     subtasks: string[];
 };
 
+type EditTaskParams = {
+    id: number;
+    title: string;
+    description: string;
+    columnId: number;
+    priorityId: number;
+    subtasks: {
+        title: string;
+        done?: boolean;
+        id?: number;
+        task_id?: number;
+    }[];
+};
+
 export const tasksApi = createApi({
     reducerPath: "tasksApi",
     baseQuery: fetchBaseQuery({
@@ -37,12 +51,17 @@ export const tasksApi = createApi({
                 dispatch(boardsApi.util.invalidateTags(["Columns"]))
             },
         }),
-        editTask: builder.mutation<unknown, unknown>({
+        editTask: builder.mutation<void, EditTaskParams>({
             query: ({ id, ...body }) => ({
                 url: `/${id}`,
                 method: "PATCH",
                 body
-            })
+            }),
+            invalidatesTags: ["Tasks"],
+            async onQueryStarted(_, { dispatch, queryFulfilled }) {
+                await queryFulfilled;
+                dispatch(boardsApi.util.invalidateTags(["Columns"]))
+            },
         }),
         deleteTask: builder.mutation<void, number>({
             query: (id) => ({

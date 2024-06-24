@@ -7,13 +7,19 @@ import Button from "./ui/Button";
 import { TbDotsVertical, TbEdit, TbTrash } from "react-icons/tb";
 import { useDeleteTaskMutation } from "../api/tasks/tasksApi";
 import { useClickOutside } from "../hooks/useClickOutside";
+import { useModal } from "../hooks/useModal";
+import { useParams } from "react-router";
+import EditTaskModal from "./Modals/EditTaskModal";
 
 type TaskCardProps = {
   data: Task;
 };
 
 const TaskCard = ({ data }: TaskCardProps) => {
+  const { boardId } = useParams();
+
   const taskDrawer = useDrawer();
+  const editModal = useModal();
 
   const ref = useRef<HTMLDivElement>(null);
   const [openMenu, setOpenMenu] = useState<boolean>(false);
@@ -49,7 +55,11 @@ const TaskCard = ({ data }: TaskCardProps) => {
                 className="absolute top-3 left-3 z-10 bg-white shadow-lg rounded-lg"
                 ref={ref}
               >
-                <Button size="default" variant="terciary">
+                <Button
+                  size="default"
+                  variant="terciary"
+                  onClick={editModal.onOpen}
+                >
                   <TbEdit size={24} />
                   Edit
                 </Button>
@@ -70,6 +80,13 @@ const TaskCard = ({ data }: TaskCardProps) => {
         </h4>
       </div>
       <TaskDrawer taskId={data.id} {...taskDrawer} />
+      {boardId && (
+        <EditTaskModal
+          boardId={parseFloat(boardId)}
+          taskId={data.id}
+          {...editModal}
+        />
+      )}
     </li>
   );
 };

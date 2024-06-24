@@ -17,7 +17,9 @@ const Select = forwardRef<HTMLSelectElement, SelectProps<any>>(
           className="form-select block w-full mb-2 py-2 border-2 border-gray-300 rounded-md text-lg focus:ring-0"
         >
           {options?.map((c) => (
-            <option value={c.id}>{c.title}</option>
+            <option value={c.id} key={c.id}>
+              {c.title}
+            </option>
           ))}
         </select>
         <p className="text-sm text-red-600">{error}</p>
