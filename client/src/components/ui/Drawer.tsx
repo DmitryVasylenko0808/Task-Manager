@@ -1,4 +1,6 @@
 import { PropsWithChildren } from "react";
+import { CgClose } from "react-icons/cg";
+import Button from "./Button";
 
 export type DrawerProps = PropsWithChildren & {
   open: boolean;
@@ -17,6 +19,15 @@ const Drawer = ({ open, onClose, children }: DrawerProps) => {
         onClick={(e) => e.stopPropagation()}
         className="w-drawer p-8 shadow-xl bg-white"
       >
+        <div className="mb-7 flex justify-end">
+          <Button
+            size="default"
+            className="bg-white text-tm-black-300"
+            onClick={onClose}
+          >
+            <CgClose size={32} />
+          </Button>
+        </div>
         {children}
       </div>
     </div>
