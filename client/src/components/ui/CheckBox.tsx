@@ -9,7 +9,7 @@ const CheckBox = ({ label, ...checkBoxProps }: CheckBoxProps) => {
     <div className="mb-4 flex items-center gap-2.5">
       <input
         {...checkBoxProps}
-        className="rounded-sm border focus:ring-0 form-checkbox"
+        className="form-checkbox rounded-sm border focus:ring-0"
         type="checkbox"
       />
       {label && <label className="font-light">{label}</label>}

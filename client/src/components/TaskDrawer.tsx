@@ -4,6 +4,7 @@ import Drawer, { DrawerProps } from "./ui/Drawer";
 import Loader from "./ui/Loader";
 import PriorityBlock from "./PriorityBlock";
 import SubTaskItem from "./SubTaskItem";
+import { calculatePercent } from "../utils/calculatePercent";
 
 type TaskDrawerProps = DrawerProps & { taskId: number };
 
@@ -22,7 +23,10 @@ const TaskDrawer = ({ taskId, ...drawerProps }: TaskDrawerProps) => {
     );
   }
 
-  const doneSubtasks = data?.subtasks.filter((s) => s.done);
+  const doneSubtasks = data?.subtasks.filter((s) => s.done) || [];
+  const percentProgress = data
+    ? calculatePercent(doneSubtasks.length, data.subtasks.length)
+    : 0;
 
   return (
     <Drawer {...drawerProps}>
@@ -38,11 +42,14 @@ const TaskDrawer = ({ taskId, ...drawerProps }: TaskDrawerProps) => {
             <span>Sub Tasks</span>
           </div>
           <span>
-            {doneSubtasks?.length}/{data?.subtasks.length}
+            {doneSubtasks.length}/{data?.subtasks.length}
           </span>
         </div>
-        <div className="mb-7 relative h-1 bg-tm-gray rounded-lg">
-          <div className="w-[30%] h-full bg-pink-300 rounded-lg" />
+        <div className="mb-7 w-full relative h-1 bg-tm-gray rounded-lg">
+          <div
+            className="h-full bg-tm-primary/30 rounded-lg"
+            style={{ width: `${percentProgress}%` }}
+          />
         </div>
         {data?.subtasks.map((s) => (
           <SubTaskItem data={s} key={s.id} />

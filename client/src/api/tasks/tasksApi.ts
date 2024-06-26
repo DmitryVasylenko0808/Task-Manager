@@ -25,6 +25,12 @@ type EditTaskParams = {
     }[];
 };
 
+type ToggleSubtaskParams = {
+    id: number;
+    subtaskId: number;
+    value: boolean;
+}
+
 export const tasksApi = createApi({
     reducerPath: "tasksApi",
     baseQuery: fetchBaseQuery({
@@ -73,6 +79,21 @@ export const tasksApi = createApi({
                 await queryFulfilled;
                 dispatch(boardsApi.util.invalidateTags(["Columns"]))
             },
+        }),
+        toggleSubTask: builder.mutation<void, ToggleSubtaskParams>({
+            query: ({ id, subtaskId, ...body }) => ({ 
+                url: `/${id}/subtasks/${subtaskId}`,
+                method: "PATCH",
+                body
+            }),
+            onQueryStarted({ id, subtaskId, ...body }, { dispatch, queryFulfilled }) {
+                const result = dispatch(
+                    tasksApi.util.updateQueryData("getOneTask", id, (draft) => {
+                        draft.subtasks = draft.subtasks.map((s) => s.id === subtaskId ? { ...s, done: body.value } : s )
+                    }))
+
+                queryFulfilled.catch(result.undo)
+            },
         })
     })
 });
@@ -81,5 +102,6 @@ export const {
     useGetOneTaskQuery,
     useCreateTaskMutation,
     useEditTaskMutation,
-    useDeleteTaskMutation
+    useDeleteTaskMutation,
+    useToggleSubTaskMutation
  } = tasksApi;
