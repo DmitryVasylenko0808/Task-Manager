@@ -50,6 +50,7 @@ const SignInForm = () => {
         />
         <TextField
           {...register("password")}
+          type="password"
           label="Password"
           error={errors.password?.message}
         />

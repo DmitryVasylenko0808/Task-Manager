@@ -14,6 +14,7 @@ import {
   useGetOneTaskQuery,
 } from "../../api/tasks/tasksApi";
 import Loader from "../ui/Loader";
+import { useEffect } from "react";
 
 const subtasksSchema = z.object({
   id: z.number().optional(),
@@ -56,6 +57,7 @@ const EditTaskModal = ({
 
   const {
     register,
+    reset,
     handleSubmit,
     control,
     formState: { errors },
@@ -75,6 +77,12 @@ const EditTaskModal = ({
     name: "subtasks",
   });
 
+  useEffect(() => {
+    return () => {
+      reset();
+    };
+  }, [modalProps.open]);
+
   const submitHandler = (data: EditTaskFormFields) => {
     if (task) {
       const subtasksItems = data.subtasks.map((s) => {
@@ -93,14 +101,14 @@ const EditTaskModal = ({
         subtasks: subtasksItems,
       };
 
-      console.log(sendData);
-
       triggerEditTask(sendData)
         .unwrap()
         .then(() => alert("Success"))
         .catch((err) => alert(err.data.message));
     }
   };
+
+  const isDisabledButton = isLoadingTask || isError || isLoading;
 
   return (
     <Modal {...modalProps}>
@@ -131,7 +139,7 @@ const EditTaskModal = ({
             error={errors.priorityId?.message}
           />
           {fields.map((field, index) => (
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2" key={field.id}>
               <TextField
                 {...register(`subtasks.${index}.title`)}
                 label={`Subtask ${index + 1}`}
@@ -161,8 +169,13 @@ const EditTaskModal = ({
           >
             Add Subtask
           </Button>
-          <Button type="submit" size="big" variant="primary">
-            Edit Task
+          <Button
+            type="submit"
+            size="big"
+            variant="primary"
+            disabled={isDisabledButton}
+          >
+            {isLoading ? <Loader variant="button" /> : "Edit Task"}
           </Button>
         </div>
       </form>

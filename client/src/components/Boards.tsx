@@ -1,8 +1,12 @@
 import { useGetBoardsQuery } from "../api/boards/boardsApi";
+import { useModal } from "../hooks/useModal";
 import { NavLink } from "react-router-dom";
 import AddBoardButton from "./AddBoardButton";
+import AddBoardModal from "./Modals/AddBoardModal";
 
 const Boards = () => {
+  const modal = useModal();
+
   const { data } = useGetBoardsQuery();
 
   return (
@@ -20,7 +24,8 @@ const Boards = () => {
           </li>
         ))}
       </ul>
-      <AddBoardButton />
+      <AddBoardButton onClick={modal.onOpen} />
+      <AddBoardModal {...modal} />
     </div>
   );
 };

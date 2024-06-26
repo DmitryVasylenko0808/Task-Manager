@@ -12,7 +12,7 @@ const Modal = ({ open, onClose, children }: ModalProps) => {
 
   return (
     <div className="fixed top-0 left-0 z-50 w-full min-h-screen bg-black/30 flex items-center justify-center">
-      <div className="p-7 bg-white shadow-xl rounded-2xl">
+      <div className="p-7 bg-white shadow-xl rounded-2xl max-h-[960px] overflow-auto">
         <div className="mb-1 flex justify-end">
           <Button
             size="default"

@@ -22,7 +22,7 @@ type AddColumnFormFields = z.infer<typeof addColumnSchema>;
 const AddColumnModal = ({ board, ...modalProps }: AddColumnModalProps) => {
   const {
     register,
-    setFocus,
+    reset,
     handleSubmit,
     formState: { errors },
   } = useForm<AddColumnFormFields>({
@@ -31,7 +31,11 @@ const AddColumnModal = ({ board, ...modalProps }: AddColumnModalProps) => {
 
   const [triggerAddColumn, { isLoading }] = useAddColumnMutation();
 
-  useEffect(() => setFocus("title"), []);
+  useEffect(() => {
+    return () => {
+      reset();
+    };
+  }, [modalProps.open]);
 
   const submitHandler = (data: AddColumnFormFields) => {
     triggerAddColumn({ id: board.id, ...data })

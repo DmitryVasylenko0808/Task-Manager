@@ -56,11 +56,13 @@ const SignUpForm = () => {
         />
         <TextField
           {...register("password")}
+          type="password"
           label="Password"
           error={errors.password?.message}
         />
         <TextField
           {...register("confirmPassword")}
+          type="password"
           label="Confirm Password"
           error={errors.confirmPassword?.message}
         />

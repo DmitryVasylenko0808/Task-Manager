@@ -11,6 +11,7 @@ import Select from "../ui/Select";
 import { CgClose } from "react-icons/cg";
 import { useCreateTaskMutation } from "../../api/tasks/tasksApi";
 import Loader from "../ui/Loader";
+import { useEffect } from "react";
 
 const subtasksSchema = z.object({
   value: z.string().min(1, "Value is required"),
@@ -39,6 +40,7 @@ const AddTaskModal = ({ boardId, ...modalProps }: AddTaskModalProps) => {
 
   const {
     register,
+    reset,
     handleSubmit,
     control,
     formState: { errors },
@@ -53,6 +55,12 @@ const AddTaskModal = ({ boardId, ...modalProps }: AddTaskModalProps) => {
     control,
     name: "subtasks",
   });
+
+  useEffect(() => {
+    return () => {
+      reset();
+    };
+  }, [modalProps.open]);
 
   const submitHandler = (data: AddTaskFormFields) => {
     triggerCreateTask({
@@ -95,7 +103,7 @@ const AddTaskModal = ({ boardId, ...modalProps }: AddTaskModalProps) => {
             error={errors.priorityId?.message}
           />
           {fields.map((field, index) => (
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2" key={field.id}>
               <TextField
                 {...register(`subtasks.${index}.value`)}
                 label={`Subtask ${index + 1}`}

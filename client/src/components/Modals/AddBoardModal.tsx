@@ -19,7 +19,7 @@ type AddBoardModalProps = ModalProps;
 const AddBoardModal = (modalProps: AddBoardModalProps) => {
   const {
     register,
-    setFocus,
+    reset,
     handleSubmit,
     formState: { errors },
   } = useForm<AddBoardFormFields>({
@@ -35,12 +35,16 @@ const AddBoardModal = (modalProps: AddBoardModalProps) => {
       .catch(() => alert("Oops... something went wrong"));
   };
 
-  useEffect(() => setFocus("title"), []);
+  useEffect(() => {
+    return () => {
+      reset();
+    };
+  }, [modalProps.open]);
 
   return (
     <Modal {...modalProps}>
       <form className="w-boardModal" onSubmit={handleSubmit(submitHandler)}>
-        <h3 className="mb-4 text-2xl">Creating Board</h3>
+        <h3 className="mb-4 text-center text-2xl">Creating Board</h3>
         <div className="mb-7">
           <TextField
             {...register("title")}
