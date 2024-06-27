@@ -4,12 +4,14 @@ import LogOut from "./LogOut";
 
 const SideBar = () => {
   return (
-    <aside className="flex flex-col border-r">
-      <div className="px-7 flex-1 flex flex-col">
-        <h1 className="mb-3 py-6 text-3xl text-tm-black-300 font-bold">
-          Task Manager App
-        </h1>
-        <Boards />
+    <aside className="min-w-80 flex flex-col border-r">
+      <div className="flex-1 flex flex-col items-center">
+        <div>
+          <h1 className="mb-3 py-6 text-3xl text-tm-black-300 font-bold">
+            Task Manager App
+          </h1>
+          <Boards />
+        </div>
       </div>
       <LogOut />
     </aside>
