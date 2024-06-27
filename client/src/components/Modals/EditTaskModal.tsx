@@ -103,7 +103,6 @@ const EditTaskModal = ({
 
       triggerEditTask(sendData)
         .unwrap()
-        .then(() => alert("Success"))
         .catch((err) => alert(err.data.message));
     }
   };

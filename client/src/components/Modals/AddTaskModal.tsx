@@ -70,7 +70,6 @@ const AddTaskModal = ({ boardId, ...modalProps }: AddTaskModalProps) => {
       subtasks: data.subtasks.map((s) => s.value),
     })
       .unwrap()
-      .then(() => alert("Success"))
       .catch((err) => alert(err.data.message));
   };
 
