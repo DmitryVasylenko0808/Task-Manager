@@ -16,7 +16,7 @@ const Columns = () => {
       </div>
       <div className="px-12 flex-1 flex gap-x-4 overflow-auto">
         {isLoading ? (
-          <div className="flex justify-center">
+          <div className="w-full flex justify-center">
             <Loader variant="default" />
           </div>
         ) : (
